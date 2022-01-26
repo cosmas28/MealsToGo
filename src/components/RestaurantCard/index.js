@@ -4,8 +4,9 @@ import { StyleSheet } from 'react-native'
 import styled from 'styled-components/native'
 
 const Title = styled.Text`
-	padding: 16px;
-	background-color: white;
+	font-family: ${({theme}) => theme.fonts.body}
+	padding: ${({theme}) => theme.space[3]};
+	background-color: ${({theme}) => theme.colors.bg.primary};
 `
 
 const RestaurantCard = () => (

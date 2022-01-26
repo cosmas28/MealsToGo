@@ -1,37 +1,52 @@
 import * as React from 'react'
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import styled from 'styled-components/native'
+import {ThemeProvider} from "styled-components/native"
+import {useFonts as useOswald, Oswald_400Regular} from '@expo-google-fonts/oswald'
+import {useFonts as useLato, Lato_400Regular} from '@expo-google-fonts/lato'
 
 import RestaurantCard from './src/components/RestaurantCard'
+import { theme } from './src/infrastructure/theme';
 
 const StyledSafeArea = styled.SafeAreaView`
   flex: 1;
-  background-color: #fff;
+  background-color: ${({theme}) => theme.colors.bg.primary};
   align-items: center;
   justify-content: center;
 `
 
 const SearchBarWrapper = styled.View`
-  background-color: green;
+  background-color: ${(props) => props.theme.colors.bg.primary};
   width: 100%;
-  padding: 10px;
+  padding: ${({theme}) => theme.space[3]};
 `
 
 const RestaurantList = styled.View`
   flex: 1;
-  background-color: blue;
+  background-color: ${({theme}) => theme.colors.bg.secondary};
   width: 100%;
-  padding: 10px;
+  padding: ${({theme}) => theme.space[3]};
 `
 
 export default function App() {
-  [searchQuery, setSearchQuery] = React.useState('')
+  const [oswaldLoaded] = useOswald({
+    Oswald_400Regular,
+  })
+  const [latoLoaded] = useLato({
+    Lato_400Regular,
+  })
+
+  const [searchQuery, setSearchQuery] = React.useState('')
+  if(!oswaldLoaded || !latoLoaded) {
+    return null
+  }
   return (
-    <StyledSafeArea>
-      <SearchBarWrapper><Searchbar placeholder="Search" onChangeText={setSearchQuery} value={searchQuery}/></SearchBarWrapper>
-      <RestaurantList><RestaurantCard/></RestaurantList>
-    </StyledSafeArea>
+    <ThemeProvider theme={theme}>
+      <StyledSafeArea>
+        <SearchBarWrapper><Searchbar placeholder="Search" onChangeText={setSearchQuery} value={searchQuery}/></SearchBarWrapper>
+        <RestaurantList><RestaurantCard/></RestaurantList>
+      </StyledSafeArea>
+    </ThemeProvider>
   );
 }
 
