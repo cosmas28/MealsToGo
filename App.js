@@ -18,7 +18,7 @@ const StyledSafeArea = styled.SafeAreaView`
 const SearchBarWrapper = styled.View`
   background-color: ${(props) => props.theme.colors.bg.primary};
   width: 100%;
-  padding: ${({theme}) => theme.space[3]};
+  padding: ${({theme}) => theme.space[3]}; 
 `
 
 const RestaurantList = styled.View`
