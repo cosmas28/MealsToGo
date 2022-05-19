@@ -1,37 +1,13 @@
 import * as React from 'react'
 import { Card, Button } from 'react-native-paper'
-import { Image, Text } from 'react-native'
+import { Image } from 'react-native'
 import styled from 'styled-components/native'
 import { SvgXml } from "react-native-svg";
 import star from '../../../assets/star'
 import open from '../../../assets/open'
 import { Spacer } from '../Spacer'
-
-const Title = styled.Text`
-	font-family: ${({theme}) => theme.fonts.heading};
-	font-size: ${({ theme }) => theme.fontSizes.body};
-	background-color: ${({theme}) => theme.colors.bg.primary};
-`
-
-const Info = styled.View`
-	padding: ${({ theme }) => theme.space[3]};
-`
-
-const Address = styled.Text`
-	font-family: ${({ theme }) => theme.fonts.body};
-	font-size: ${({ theme }) => theme.fontSizes.caption};
-`
-
-const Rating = styled.View`
-	flex-direction: row;
-`
-
-const Section = styled.View`
-	flex-direction: row;
-	justify-content: space-between;
-	padding-top: ${({ theme }) => theme.space[2]};
-	padding-bottom: ${({ theme }) => theme.space[2]};
-`
+import { Text } from '../Text'
+import { Info, Rating, Section } from './styles'
 
 const RestaurantCard = ({ restaurant = {} }) => {
 	const {
@@ -52,7 +28,7 @@ const RestaurantCard = ({ restaurant = {} }) => {
 		<Card>
 			<Card.Cover source={{ uri: photos[0] }} />
 			<Info>
-				<Title>{name}</Title>
+				<Text variant="label">{name}</Text>
 				<Section>
 					<Rating>
 						{ratingArray.map((_, index) => (
@@ -69,7 +45,7 @@ const RestaurantCard = ({ restaurant = {} }) => {
 						<Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
 					</Spacer>
 				</Section>
-				<Address>{address}</Address>
+				<Text variant="body">{address}</Text>
 			</Info>
 		</Card>
 	)
