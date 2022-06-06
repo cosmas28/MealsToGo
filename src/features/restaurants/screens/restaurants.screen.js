@@ -5,6 +5,7 @@ import { FlatList } from 'react-native'
 
 import RestaurantCard from '../../../components/RestaurantCard'
 import { Spacer } from  '../../../components/Spacer/'
+import {RestaurantContext} from '../../../services/restaurants/restaurants.context'
 
 const StyledSafeArea = styled.SafeAreaView`
   flex: 1;
@@ -27,27 +28,13 @@ const RestaurantList = styled(FlatList).attrs({
 
 export const RestaurantsScreen = () => {
 	const [searchQuery, setSearchQuery] = React.useState('')
+	const {restaurants} = React.useContext(RestaurantContext)
 
   return (
     <StyledSafeArea>
 			<SearchBarWrapper><Searchbar placeholder="Search" onChangeText={setSearchQuery} value={searchQuery}/></SearchBarWrapper>
 			<RestaurantList
-				data={[
-					{ name: 1 },
-					{ name: 2 },
-					{ name: 3 },
-					{ name: 4 },
-					{ name: 5 },
-					{ name: 6 },
-					{ name: 7 },
-					{ name: 8 },
-					{ name: 9 },
-					{ name: 10 },
-					{ name: 11 },
-					{ name: 12 },
-					{ name: 13 },
-					{ name: 14 },
-				]}
+				data={restaurants}
 				keyExtractor={item => item.name}
 				renderItem={() => (
 					<Spacer position="bottom" size="large"><RestaurantCard/></Spacer>
