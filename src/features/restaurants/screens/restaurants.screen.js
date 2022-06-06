@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Searchbar } from 'react-native-paper';
+import { Searchbar, ActivityIndicator, Colors } from 'react-native-paper';
 import styled from 'styled-components/native'
 import { FlatList } from 'react-native'
 
@@ -26,13 +26,30 @@ const RestaurantList = styled(FlatList).attrs({
   },
 })``;
 
+const Loading = styled(ActivityIndicator)`
+	margin-left: -25px;
+`;
+
+const LoadingContainer = styled(ActivityIndicator)`
+	position: absolute;
+	top: 50%;
+	left: 50%;
+`
+
 export const RestaurantsScreen = () => {
 	const [searchQuery, setSearchQuery] = React.useState('')
-	const {restaurants} = React.useContext(RestaurantContext)
+	const {restaurants, isLoading} = React.useContext(RestaurantContext)
 
   return (
     <StyledSafeArea>
 			<SearchBarWrapper><Searchbar placeholder="Search" onChangeText={setSearchQuery} value={searchQuery}/></SearchBarWrapper>
+			{
+				isLoading && (
+					<LoadingContainer>
+							<Loading size={50} animating={true} color={Colors.blue300} />
+					</LoadingContainer>
+				)
+			}
 			<RestaurantList
 				data={restaurants}
 				keyExtractor={item => item.name}
