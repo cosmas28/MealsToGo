@@ -11,6 +11,7 @@ import { theme } from './src/infrastructure/theme';
 import { RestaurantsScreen } from "./src/features/restaurants/screens/restaurants.screen";
 import { StyledSafeArea } from './src/components/utility/safe-area.component'
 import {RestaurantContextProvider} from './src/services/restaurants/restaurants.context'
+import {LocationProvider} from './src/services/location/location.context'
 
 const Tab = createBottomTabNavigator()
 
@@ -39,48 +40,50 @@ export default function App() {
   }
   return (
     <ThemeProvider theme={theme}>
-      <RestaurantContextProvider>
-        <NavigationContainer>
-          <Tab.Navigator
-            initialRouteName='Restaurants'
-            screenOptions={{
-              tabBarActiveTintColor: 'tomato',
-              tabBarInactiveTintColor: 'gray'
-            }}
-          >
-            <Tab.Screen
-              name='Restaurants'
-              component={RestaurantsScreen}
-              options={{
-                tabBarLabel: 'Restaurants',
-                tabBarIcon: ({ color, size }) => (
-                  <Ionicons name='md-restaurant' size={size} color={color} />
-                )
+      <LocationProvider>
+        <RestaurantContextProvider>
+          <NavigationContainer>
+            <Tab.Navigator
+              initialRouteName='Restaurants'
+              screenOptions={{
+                tabBarActiveTintColor: 'tomato',
+                tabBarInactiveTintColor: 'gray'
               }}
-            />
-            <Tab.Screen
-              name='Map'
-              component={Map}
-              options={{
-                tabBarLabel: 'Map',
-                tabBarIcon: ({ color, size }) => (
-                  <Ionicons name='md-map' size={size} color={color} />
-                )
-              }}
-            />
-            <Tab.Screen
-              name='Settings'
-              component={Settings}
-              options={{
-                tabBarLabel: 'Set',
-                tabBarIcon: ({ color, size }) => (
-                  <Ionicons name='md-settings' size={size} color={color} />
-                )
-              }}
-            />
-          </Tab.Navigator>
-        </NavigationContainer>
-      </RestaurantContextProvider>
+            >
+              <Tab.Screen
+                name='Restaurants'
+                component={RestaurantsScreen}
+                options={{
+                  tabBarLabel: 'Restaurants',
+                  tabBarIcon: ({ color, size }) => (
+                    <Ionicons name='md-restaurant' size={size} color={color} />
+                  )
+                }}
+              />
+              <Tab.Screen
+                name='Map'
+                component={Map}
+                options={{
+                  tabBarLabel: 'Map',
+                  tabBarIcon: ({ color, size }) => (
+                    <Ionicons name='md-map' size={size} color={color} />
+                  )
+                }}
+              />
+              <Tab.Screen
+                name='Settings'
+                component={Settings}
+                options={{
+                  tabBarLabel: 'Set',
+                  tabBarIcon: ({ color, size }) => (
+                    <Ionicons name='md-settings' size={size} color={color} />
+                  )
+                }}
+              />
+            </Tab.Navigator>
+          </NavigationContainer>
+        </RestaurantContextProvider>
+      </LocationProvider>
     </ThemeProvider>
   );
 }
