@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { ActivityIndicator, Colors } from 'react-native-paper';
 import styled from 'styled-components/native'
-import { FlatList } from 'react-native'
+import { FlatList, Pressable, TouchableOpacity } from 'react-native'
 
 import RestaurantCard from '../../../components/RestaurantCard'
 import { Spacer } from  '../../../components/Spacer/'
@@ -31,7 +31,7 @@ const LoadingContainer = styled(ActivityIndicator)`
 	left: 50%;
 `
 
-export const RestaurantsScreen = () => {
+export const RestaurantsScreen = ({ navigation }) => {
 	const {restaurants, isLoading} = React.useContext(RestaurantContext)
 
   return (
@@ -48,7 +48,11 @@ export const RestaurantsScreen = () => {
 				data={restaurants}
 				keyExtractor={item => item.name}
 				renderItem={({item}) => (
-					<Spacer position="bottom" size="large"><RestaurantCard restaurant={item} /></Spacer>
+					<TouchableOpacity
+						onPress={() => navigation.navigate("RestaurantDetail", { restaurant: item})}
+					>
+						<Spacer position="bottom" size="large"><RestaurantCard restaurant={item} /></Spacer>
+					</TouchableOpacity>
 				)}
 			/>
 		</StyledSafeArea>
