@@ -7,12 +7,6 @@ import {RestaurantDetailScreen} from '../../features/restaurants/screens/restaur
 
 const RestaurantStack = createStackNavigator()
 
-const RestaurantDetail = () => (
-  <StyledSafeArea>
-    <Text>Restaurant Detail</Text>
-  </StyledSafeArea>
-)
-
 export const RestaurantsNavigator = () => {
 	return (
 		<RestaurantStack.Navigator
