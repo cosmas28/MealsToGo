@@ -13,6 +13,10 @@ export const Search = () => {
 	const { search, keyword } = React.useContext(LocationContext)
 	const [searchKeyword, setSearchKeyword] = React.useState(keyword)
 
+	React.useEffect(() => {
+		setSearchKeyword(keyword)
+	}, [keyword])
+
 	return (
 		<SearchBarWrapper>
 			<Searchbar

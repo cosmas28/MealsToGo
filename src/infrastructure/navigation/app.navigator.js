@@ -6,18 +6,13 @@ import { Text } from "react-native";
 
 import {RestaurantsNavigator} from './restaurants.navigator'
 import {StyledSafeArea} from '../../components/utility/safe-area.component'
+import {Map} from '../../features/map/screens/map.screen'
 
 const Tab = createBottomTabNavigator();
 
 const Settings = () => (
   <StyledSafeArea>
     <Text>Settings</Text>
-  </StyledSafeArea>
-)
-
-const Map = () => (
-  <StyledSafeArea>
-    <Text>Map</Text>
   </StyledSafeArea>
 )
 
